@@ -12,7 +12,7 @@
 
   <depend>control_toolbox</depend>
   <depend>controller_interface</depend>
-  <depend>gazebo</depend>
+  <depend>gazebo_dev</depend>
   <depend>gazebo_ros</depend>
   <depend>hardware_interface</depend>
   <depend>transmission_interface</depend>

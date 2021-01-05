@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   kdl_parser
   transmission_interface
+  gazebo_dev
   gazebo_ros
   std_msgs
 )
@@ -36,6 +37,7 @@ catkin_package(
     pluginlib
     kdl_parser
     transmission_interface
+    gazebo_dev
     gazebo_ros
     std_msgs
   INCLUDE_DIRS include
@@ -60,8 +62,8 @@ target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
 
-## REAL 
-# KUKA FRI library
+### REAL
+## KUKA FRI library
 add_library(friremote
   src/fri/friremote.cpp
   src//fri/friudp.cpp
@@ -73,7 +75,7 @@ add_executable(lwr_hw_fri_node  src/lwr_hw_fri_node.cpp
 )
 add_dependencies(lwr_hw_fri_node
   friremote
-  ${PROJECT_NAME} 
+  ${PROJECT_NAME}
 )
 target_link_libraries(lwr_hw_fri_node
   friremote
@@ -100,7 +102,7 @@ add_executable(lwr_hw_fril_node  src/lwr_hw_fril_node.cpp
 )
 add_dependencies(lwr_hw_fril_node
   FRILibrary
-  ${PROJECT_NAME} 
+  ${PROJECT_NAME}
 )
 target_link_libraries(lwr_hw_fril_node
   fril
@@ -111,6 +113,9 @@ target_link_libraries(lwr_hw_fril_node
 ## SIMULATION
 # lwr hw sim gazebo plugin 
 find_package(gazebo REQUIRED)
+if(gazebo_VERSION_MAJOR GREATER 8)
+    ign_import_target(UUID)
+endif()
 include_directories(${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 add_library(lwr_hw_gazebo_plugin  src/lwr_hw_gazebo_plugin.cpp

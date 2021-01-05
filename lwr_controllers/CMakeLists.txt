@@ -19,6 +19,9 @@ find_package(catkin REQUIRED COMPONENTS
   lwr_hw
   tf_conversions
 )
+if(gazebo_VERSION_MAJOR GREATER 8)
+    ign_import_target(UUID)
+endif()
 
 add_definitions (-fpermissive -std=c++11)
 
